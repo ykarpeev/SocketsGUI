@@ -1,0 +1,196 @@
+<UserControl
+    x:Class="YK.Socket.Client.GUI.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dataTemplates="using:YK.Socket.Client.GUI.DataTemplates"
+    xmlns:local="using:YK.Socket.Client.GUI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:YK.Socket.Client.GUI.Models"
+    xmlns:vm="clr-namespace:YK.Socket.Client.GUI.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <local:MessageConverter x:Key="MessageConverter" />
+        <local:ByteArrayConverter x:Key="ByteArrayConverter" />
+
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style x:DataType="local:LogMessage" Selector="DataGridCell">
+            <Setter Property="Foreground" Value="{Binding Type, Converter={StaticResource MessageConverter}}" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid ColumnDefinitions="2*,1*">
+
+
+        <Grid Grid.Column="0" RowDefinitions="*,Auto">
+            <HeaderedContentControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Stretch"
+                Header="Data"
+                Theme="{DynamicResource GroupBox}">
+                <DataGrid
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{Binding Messages}"
+                    SelectionMode="Extended">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TimeStamp, StringFormat=h:mm:ss:fff, Mode=OneWay}" Header="Time" />
+                        <DataGridTextColumn Binding="{Binding Message}" Header="Data" />
+                        <DataGridTextColumn Binding="{Binding RawData, Mode=OneWay, Converter={StaticResource ByteArrayConverter}}" Header="Raw" />
+
+                    </DataGrid.Columns>
+
+                    <Interaction.Behaviors>
+                        <local:AutoScrollBehavior />
+                    </Interaction.Behaviors>
+
+                </DataGrid>
+            </HeaderedContentControl>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto">
+                <TextBox Grid.Column="0" Text="{Binding OutgoingBuffer}" />
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding SendBufferCommand}"
+                    Content="Send"
+                    IsDefault="True" />
+
+                <Button
+                    Grid.Column="2"
+                    Classes="Danger"
+                    Command="{Binding ClearCommand}"
+                    Content="Clear" />
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Column="1" RowDefinitions="Auto,Auto">
+
+            <HeaderedContentControl
+                Grid.Row="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Connection"
+                Theme="{DynamicResource GroupBox}">
+                <Grid
+                    VerticalAlignment="Top"
+                    ColumnDefinitions="Auto, *"
+                    RowDefinitions="*,*,*,*,*,*,*">
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Classes="H6"
+                        Content="Host"
+                        Theme="{StaticResource TitleLabel}" />
+
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Classes="Bordered"
+                        Text="{Binding Host}" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Classes="H6"
+                        Theme="{StaticResource TitleLabel}">
+                        Port
+                    </Label>
+
+                    <NumericUpDown
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Classes="Bordered"
+                        Increment="1"
+                        Value="{Binding Port}" />
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource SemiGrey9Color}"
+                        Text="Disconnected">
+                        <Interaction.Behaviors>
+                            <DataTriggerBehavior Binding="{Binding IsConnecting}" Value="True">
+                                <ChangePropertyAction
+                                    PropertyName="Text"
+                                    TargetObject="text"
+                                    Value="Connecting" />
+                                <ChangePropertyAction
+                                    PropertyName="Foreground"
+                                    TargetObject="text"
+                                    Value="Orange" />
+                            </DataTriggerBehavior>
+                            <DataTriggerBehavior Binding="{Binding IsConnected}" Value="False">
+                                <ChangePropertyAction
+                                    PropertyName="Text"
+                                    TargetObject="text"
+                                    Value="Disconnected" />
+                                <ChangePropertyAction
+                                    PropertyName="Foreground"
+                                    TargetObject="text"
+                                    Value="{DynamicResource SemiGrey9Color}" />
+                            </DataTriggerBehavior>
+
+                            <DataTriggerBehavior Binding="{Binding IsConnected}" Value="True">
+                                <ChangePropertyAction
+                                    PropertyName="Text"
+                                    TargetObject="text"
+                                    Value="Connected" />
+                                <ChangePropertyAction
+                                    PropertyName="Foreground"
+                                    TargetObject="text"
+                                    Value="{DynamicResource SemiGreen8}" />
+                            </DataTriggerBehavior>
+
+                        </Interaction.Behaviors>
+
+                    </TextBlock>
+                    <Button
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="3"
+                        HorizontalAlignment="Left"
+                        Classes="Primary"
+                        Command="{Binding ConnectCommand}"
+                        Content="Connect" />
+
+                </Grid>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Protocol"
+                Theme="{DynamicResource GroupBox}">
+
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="Append \r" IsChecked="{Binding AppendCR}" />
+                    <CheckBox Content="Append \n" IsChecked="{Binding AppendNL}" />
+                </StackPanel>
+
+            </HeaderedContentControl>
+        </Grid>
+    </Grid>
+</UserControl>
