@@ -4,7 +4,7 @@ A simple UI to open a raw socket + send and receive data.
 
 ## About
 
-Used [Avalonia](https://github.com/AvaloniaUI/Avalonia) for the UI and [SuperSimpleTCP](https://github.com/jchristn/SuperSimpleTcp) for the socket communications.
+Uses [Avalonia](https://github.com/AvaloniaUI/Avalonia) for the UI and [SuperSimpleTCP](https://github.com/jchristn/SuperSimpleTcp) for the socket communications.
 
 ## Screenshot
 
