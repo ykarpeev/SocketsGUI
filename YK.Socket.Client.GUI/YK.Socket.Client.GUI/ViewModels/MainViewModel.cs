@@ -12,6 +12,7 @@ namespace YK.Socket.Client.GUI.ViewModels
     using CommunityToolkit.Mvvm.Input;
     using YK.Socket.Client.GUI.Models;
     using YK.Socket.Comms.TCP;
+    using YK.Socket.Extensions;
 
     /// <summary>
     /// Main view model.
@@ -50,6 +51,10 @@ namespace YK.Socket.Client.GUI.ViewModels
         [ObservableProperty]
         private bool appendNL;
 
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SendBufferCommand))]
+        private bool sendHex;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// </summary>
@@ -75,6 +80,11 @@ namespace YK.Socket.Client.GUI.ViewModels
             }
 
             var b = Encoding.UTF8.GetBytes(s);
+
+            if (this.SendHex)
+            {
+                b = ArrayHelpers.HexToByteArray(s);
+            }
 
             if (this.IsConnected)
             {
@@ -128,7 +138,27 @@ namespace YK.Socket.Client.GUI.ViewModels
 
         private bool CanSend()
         {
-            return this.IsConnected && this.OutgoingBuffer != null;
+            bool connected = this.IsConnected && this.OutgoingBuffer != null;
+            bool validData = true;
+
+            if (this.SendHex)
+            {
+                if (this.OutgoingBuffer != null)
+                {
+                    validData = this.OutgoingBuffer.IsValidHex();
+                }
+                else
+                {
+                    validData = false;
+                }
+            }
+
+            if (validData && connected)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void Socket_ConnectedEvent(object? sender, bool e)

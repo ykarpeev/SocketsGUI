@@ -188,6 +188,8 @@
                 <StackPanel Orientation="Vertical">
                     <CheckBox Content="Append \r" IsChecked="{Binding AppendCR}" />
                     <CheckBox Content="Append \n" IsChecked="{Binding AppendNL}" />
+                    <CheckBox Content="Send Hex" IsChecked="{Binding SendHex}" />
+
                 </StackPanel>
 
             </HeaderedContentControl>

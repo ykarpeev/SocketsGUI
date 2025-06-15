@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Client.GUI", "YK.Socket.Client.GUI\YK.Socket.Client.GUI.csproj", "{21AB9EC1-0736-4092-9779-986F12CEA274}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Comms.Services", "..\YK.Socket.Comms.Services\YK.Socket.Comms.Services.csproj", "{F822B207-08CA-4D83-9A11-532F5F4AC489}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Comms.TCP", "..\YK.Socket.Comms.TCP\YK.Socket.Comms.TCP.csproj", "{E1E614A2-1F73-4236-83DC-4EE810B34DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Extensions", "YK.Socket.Extensions\YK.Socket.Extensions.csproj", "{108F7D3D-6B9C-473D-8F00-140BD03CD2FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.ExtensionsTests", "YK.Socket.ExtensionsTests\YK.Socket.ExtensionsTests.csproj", "{6E8DED6A-D64A-40F8-B816-9A5E8A7A9368}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,14 @@ Global
 		{E1E614A2-1F73-4236-83DC-4EE810B34DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E614A2-1F73-4236-83DC-4EE810B34DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1E614A2-1F73-4236-83DC-4EE810B34DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108F7D3D-6B9C-473D-8F00-140BD03CD2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108F7D3D-6B9C-473D-8F00-140BD03CD2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108F7D3D-6B9C-473D-8F00-140BD03CD2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108F7D3D-6B9C-473D-8F00-140BD03CD2FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8DED6A-D64A-40F8-B816-9A5E8A7A9368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8DED6A-D64A-40F8-B816-9A5E8A7A9368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8DED6A-D64A-40F8-B816-9A5E8A7A9368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8DED6A-D64A-40F8-B816-9A5E8A7A9368}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
