@@ -46,9 +46,20 @@
                     ItemsSource="{Binding Messages}"
                     SelectionMode="Extended">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding TimeStamp, StringFormat=h:mm:ss:fff, Mode=OneWay}" Header="Time" />
-                        <DataGridTextColumn Binding="{Binding Message}" Header="Data" />
-                        <DataGridTextColumn Binding="{Binding RawData, Mode=OneWay, Converter={StaticResource ByteArrayConverter}}" Header="Raw" />
+                        <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding TimeStamp, StringFormat=h:mm:ss:fff, Mode=OneWay}"
+                            Foreground="DarkGray"
+                            Header="Time" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Message}"
+                            Header="Data" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding RawData, Mode=OneWay, Converter={StaticResource ByteArrayConverter}}"
+                            Foreground="DarkGreen"
+                            Header="Raw" />
 
                     </DataGrid.Columns>
 

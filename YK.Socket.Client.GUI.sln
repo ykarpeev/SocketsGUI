@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Client.GUI", "YK.Socket.Client.GUI\YK.Socket.Client.GUI\YK.Socket.Client.GUI.csproj", "{0A3D195C-1635-90EB-3382-1BB46CFEBFC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Client.GUI.Desktop", "YK.Socket.Client.GUI\YK.Socket.Client.GUI.Desktop\YK.Socket.Client.GUI.Desktop.csproj", "{7C2ACD50-E9C1-A42C-1247-E44A3F4394C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Comms.Services", "YK.Socket.Comms.Services\YK.Socket.Comms.Services.csproj", "{380CEC47-BE49-2765-808C-26C681051D26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Comms.TCP", "YK.Socket.Comms.TCP\YK.Socket.Comms.TCP.csproj", "{874DC14B-1666-10BC-F697-00E45D1DDD3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.Extensions", "YK.Socket.Client.GUI\YK.Socket.Extensions\YK.Socket.Extensions.csproj", "{5323F97F-5E70-7011-CA8B-498F92A91514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YK.Socket.ExtensionsTests", "YK.Socket.Client.GUI\YK.Socket.ExtensionsTests\YK.Socket.ExtensionsTests.csproj", "{034639CD-0E20-947F-7878-EB9676B97BC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A3D195C-1635-90EB-3382-1BB46CFEBFC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3D195C-1635-90EB-3382-1BB46CFEBFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3D195C-1635-90EB-3382-1BB46CFEBFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3D195C-1635-90EB-3382-1BB46CFEBFC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2ACD50-E9C1-A42C-1247-E44A3F4394C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2ACD50-E9C1-A42C-1247-E44A3F4394C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2ACD50-E9C1-A42C-1247-E44A3F4394C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2ACD50-E9C1-A42C-1247-E44A3F4394C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380CEC47-BE49-2765-808C-26C681051D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380CEC47-BE49-2765-808C-26C681051D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380CEC47-BE49-2765-808C-26C681051D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380CEC47-BE49-2765-808C-26C681051D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874DC14B-1666-10BC-F697-00E45D1DDD3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874DC14B-1666-10BC-F697-00E45D1DDD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874DC14B-1666-10BC-F697-00E45D1DDD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874DC14B-1666-10BC-F697-00E45D1DDD3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5323F97F-5E70-7011-CA8B-498F92A91514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5323F97F-5E70-7011-CA8B-498F92A91514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5323F97F-5E70-7011-CA8B-498F92A91514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5323F97F-5E70-7011-CA8B-498F92A91514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034639CD-0E20-947F-7878-EB9676B97BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034639CD-0E20-947F-7878-EB9676B97BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034639CD-0E20-947F-7878-EB9676B97BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034639CD-0E20-947F-7878-EB9676B97BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01C34262-D180-4F0E-869E-F05D07F7855C}
+	EndGlobalSection
+EndGlobal
