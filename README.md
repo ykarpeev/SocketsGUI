@@ -8,5 +8,6 @@ Uses [Avalonia](https://github.com/AvaloniaUI/Avalonia) for the UI and [SuperSim
 
 ## Screenshot
 
-![image](https://github.com/user-attachments/assets/cae7f9fe-d4ca-4634-b12d-edc699c8fd25)
+![image](https://github.com/user-attachments/assets/80e25d7b-a71d-4411-acae-c574634f248c)
+
 
