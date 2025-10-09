@@ -28,7 +28,6 @@
             <Setter Property="Foreground" Value="{Binding Type, Converter={StaticResource MessageConverter}}" />
         </Style>
     </UserControl.Styles>
-
     <Grid ColumnDefinitions="2*,1*">
 
 
@@ -70,7 +69,7 @@
                 </DataGrid>
             </HeaderedContentControl>
 
-            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto">
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto">
                 <TextBox Grid.Column="0" Text="{Binding OutgoingBuffer}" />
                 <Button
                     Grid.Column="1"
@@ -83,16 +82,21 @@
                     Classes="Danger"
                     Command="{Binding ClearCommand}"
                     Content="Clear" />
+
+                <Button
+                    Grid.Column="3"
+                    Classes="Secondary"
+                    Command="{Binding AddCommandCommand}"
+                    Content="Add to List" />
             </Grid>
         </Grid>
 
 
-        <Grid Grid.Column="1" RowDefinitions="Auto,Auto">
+        <Grid Grid.Column="1" RowDefinitions="Auto,Auto,*">
 
             <HeaderedContentControl
                 Grid.Row="0"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
                 Header="Connection"
                 Theme="{DynamicResource GroupBox}">
                 <Grid
@@ -204,6 +208,42 @@
                 </StackPanel>
 
             </HeaderedContentControl>
+
+            <HeaderedContentControl
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Header="Commands"
+                Theme="{DynamicResource GroupBox}">
+
+                    <ListBox ItemsSource="{Binding CommandList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid ColumnDefinitions="*,Auto,Auto">
+                                    <TextBlock Grid.Column="0" Text="{Binding}" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Command="{Binding $parent[ListBox].((vm:MainViewModel)DataContext).SendDataCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="Send" />
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Classes="Warning"
+                                        Command="{Binding $parent[ListBox].((vm:MainViewModel)DataContext).DeleteCommandCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="Delete" />
+                                </Grid>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+            </HeaderedContentControl>
+
         </Grid>
     </Grid>
+
 </UserControl>

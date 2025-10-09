@@ -5,6 +5,7 @@
 namespace YK.Socket.Client.GUI.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Text;
     using Avalonia.Threading;
@@ -32,6 +33,7 @@ namespace YK.Socket.Client.GUI.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SendBufferCommand))]
+        [NotifyCanExecuteChangedFor(nameof(AddCommandCommand))]
         private string outgoingBuffer;
 
         [ObservableProperty]
@@ -41,6 +43,8 @@ namespace YK.Socket.Client.GUI.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ConnectCommand))]
         [NotifyCanExecuteChangedFor(nameof(SendBufferCommand))]
+        [NotifyCanExecuteChangedFor(nameof(SendDataCommand))]
+
         private bool isConnected;
 
         private bool reconnect = false;
@@ -55,6 +59,9 @@ namespace YK.Socket.Client.GUI.ViewModels
         [NotifyCanExecuteChangedFor(nameof(SendBufferCommand))]
         private bool sendHex;
 
+        [ObservableProperty]
+        private ObservableCollection<string> commandList = [];
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// </summary>
@@ -63,12 +70,17 @@ namespace YK.Socket.Client.GUI.ViewModels
             this.Messages = [];
             this.OutgoingBuffer = string.Empty;
             this.Messages.Add(new LogMessage("Ready", DateTime.Now, EMessageType.Connection));
+            this.CommandList.CollectionChanged += (sender, args) => { this.AddCommandCommand.NotifyCanExecuteChanged(); };
         }
 
-        [RelayCommand(CanExecute = nameof(CanSend))]
-        private void SendBuffer()
+        [RelayCommand(CanExecute = nameof(CanAdd))]
+        private void AddCommand()
         {
-            var s = this.OutgoingBuffer;
+            this.CommandList.Add(this.OutgoingBuffer);
+        }
+
+        private byte[] GetCommandToSend(string s)
+        {
             if (this.AppendCR)
             {
                 s += "\r";
@@ -86,6 +98,21 @@ namespace YK.Socket.Client.GUI.ViewModels
                 b = ArrayHelpers.HexToByteArray(s);
             }
 
+            return b;
+        }
+
+
+        [RelayCommand]
+        private void DeleteCommand(string cmd)
+        {
+            this.CommandList.Remove(cmd);
+        }
+
+        [RelayCommand(CanExecute = nameof(CanSend))]
+        private void SendData(string command)
+        {
+            var b = this.GetCommandToSend(command);
+
             if (this.IsConnected)
             {
                 if (b.Length != 0)
@@ -95,6 +122,12 @@ namespace YK.Socket.Client.GUI.ViewModels
                     this.Messages.Add(new LogMessage(b, DateTime.Now, EMessageType.Outgoing));
                 }
             }
+        }
+
+        [RelayCommand(CanExecute = nameof(CanSend))]
+        private void SendBuffer()
+        {
+            this.SendData(this.OutgoingBuffer);
         }
 
         [RelayCommand]
@@ -136,9 +169,24 @@ namespace YK.Socket.Client.GUI.ViewModels
             return true;
         }
 
+        private bool CanAdd()
+        {
+            if (this.CommandList.Contains(this.OutgoingBuffer))
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(this.OutgoingBuffer))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private bool CanSend()
         {
-            bool connected = this.IsConnected && this.OutgoingBuffer != null;
+            bool connected = this.IsConnected;
             bool validData = true;
 
             if (this.SendHex)

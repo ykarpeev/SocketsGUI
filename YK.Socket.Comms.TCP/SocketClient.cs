@@ -9,7 +9,7 @@ namespace YK.Socket.Comms.TCP
     using YK.Socket.Comms.Services;
 
     /// <summary>
-    /// Socket client class - using supersimpleTCP
+    /// Socket client class - using supersimpleTCP.
     /// </summary>
     public class SocketClient : IComms
     {
@@ -38,23 +38,14 @@ namespace YK.Socket.Comms.TCP
         }
 
         /// <inheritdoc/>
-        public void Disconnect()
-        {
-            this.client?.Disconnect();
-        }
+        public void Disconnect() => this.client?.Disconnect();
 
         /// <inheritdoc/>
         public void Send(byte[] data)
         {
-            if (data.Length != 0)
+            if (data?.Length > 0 && this.client?.IsConnected == true)
             {
-                if (this.client != null)
-                {
-                    if (this.client.IsConnected)
-                    {
-                        this.client.Send(data);
-                    }
-                }
+                this.client.Send(data);
             }
         }
 
@@ -88,12 +79,10 @@ namespace YK.Socket.Comms.TCP
 
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
         {
-            if (e != null)
+            var data = e?.Data.Array;
+            if (data != null)
             {
-                if (e.Data.Array != null)
-                {
-                    this.DataReceivedEvent?.Invoke(this, e.Data.Array[..e.Data.Count]);
-                }
+                this.DataReceivedEvent?.Invoke(this, data[..e.Data.Count]);
             }
         }
     }
