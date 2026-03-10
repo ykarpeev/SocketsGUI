@@ -81,17 +81,19 @@ namespace YK.Socket.Client.GUI.ViewModels
 
         private byte[] GetCommandToSend(string s)
         {
+            var sb = new StringBuilder(s);
+
             if (this.AppendCR)
             {
-                s += "\r";
+                sb.Append('\r');
             }
 
             if (this.AppendNL)
             {
-                s += "\n";
+                sb.Append('\n');
             }
 
-            var b = Encoding.UTF8.GetBytes(s);
+            var b = Encoding.UTF8.GetBytes(sb.ToString());
 
             if (this.SendHex)
             {
@@ -100,7 +102,6 @@ namespace YK.Socket.Client.GUI.ViewModels
 
             return b;
         }
-
 
         [RelayCommand]
         private void DeleteCommand(string cmd)
@@ -111,16 +112,23 @@ namespace YK.Socket.Client.GUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanSend))]
         private void SendData(string command)
         {
-            var b = this.GetCommandToSend(command);
-
-            if (this.IsConnected)
+            try
             {
-                if (b.Length != 0)
-                {
-                    this.socket?.Send(b);
+                var b = this.GetCommandToSend(command);
 
-                    this.Messages.Add(new LogMessage(b, DateTime.Now, EMessageType.Outgoing));
+                if (this.IsConnected)
+                {
+                    if (b.Length != 0)
+                    {
+                        this.socket?.Send(b);
+
+                        this.Messages.Add(new LogMessage(b, DateTime.Now, EMessageType.Outgoing));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                this.Messages.Add(new LogMessage($"Send error: {ex.Message}", DateTime.Now, EMessageType.Error));
             }
         }
 
@@ -151,12 +159,34 @@ namespace YK.Socket.Client.GUI.ViewModels
 
             this.IsConnecting = true;
 
+            this.UnsubscribeSocket();
+            this.socket?.Dispose();
+
             this.socket = new SocketClient();
-            this.socket.ErrorEvent += this.Socket_ErrorEvent;
-            this.socket.DisconnectedEvent += this.Socket_DisconnectedEvent;
-            this.socket.ConnectedEvent += this.Socket_ConnectedEvent;
-            this.socket.DataReceivedEvent += this.Socket_DataReceivedEvent;
+            this.SubscribeSocket();
             this.socket.Connect(this.Host, this.Port);
+        }
+
+        private void SubscribeSocket()
+        {
+            if (this.socket != null)
+            {
+                this.socket.ErrorEvent += this.Socket_ErrorEvent;
+                this.socket.DisconnectedEvent += this.Socket_DisconnectedEvent;
+                this.socket.ConnectedEvent += this.Socket_ConnectedEvent;
+                this.socket.DataReceivedEvent += this.Socket_DataReceivedEvent;
+            }
+        }
+
+        private void UnsubscribeSocket()
+        {
+            if (this.socket != null)
+            {
+                this.socket.ErrorEvent -= this.Socket_ErrorEvent;
+                this.socket.DisconnectedEvent -= this.Socket_DisconnectedEvent;
+                this.socket.ConnectedEvent -= this.Socket_ConnectedEvent;
+                this.socket.DataReceivedEvent -= this.Socket_DataReceivedEvent;
+            }
         }
 
         private bool CanConnect()
