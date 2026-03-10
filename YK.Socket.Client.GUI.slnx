@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="YK.Socket.Client.GUI/YK.Socket.Client.GUI.Desktop/YK.Socket.Client.GUI.Desktop.csproj" />
+  <Project Path="YK.Socket.Client.GUI/YK.Socket.Client.GUI/YK.Socket.Client.GUI.csproj" />
+  <Project Path="YK.Socket.Client.GUI/YK.Socket.Extensions/YK.Socket.Extensions.csproj" />
+  <Project Path="YK.Socket.Client.GUI/YK.Socket.ExtensionsTests/YK.Socket.ExtensionsTests.csproj" />
+  <Project Path="YK.Socket.Comms.Services/YK.Socket.Comms.Services.csproj" />
+  <Project Path="YK.Socket.Comms.TCP/YK.Socket.Comms.TCP.csproj" />
+</Solution>

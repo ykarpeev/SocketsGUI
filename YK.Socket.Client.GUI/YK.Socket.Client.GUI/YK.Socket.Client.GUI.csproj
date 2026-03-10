@@ -15,19 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.3.11" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.11" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.11" />
+    <PackageReference Include="Avalonia" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.12" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Semi.Avalonia" Version="11.3.7.2" />
-    <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.3.7.2" />
+    <PackageReference Include="Semi.Avalonia" Version="11.3.7.3" />
+    <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.3.7.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="11.3.9.3" />
+    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="11.3.9.5" />
   </ItemGroup>
 
   <ItemGroup>
